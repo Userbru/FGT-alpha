@@ -19,6 +19,14 @@ jobs:
           distribution: 'temurin'
           java-version: '17'
 
+      # Instala o Android SDK e aceita as licenças
+      - name: Set up Android SDK
+        uses: android-actions/setup-android@v3
+
+      - name: Install SDK packages (API 34 + Build-Tools 34.0.0)
+        run: sdkmanager "platform-tools" "platforms;android-34" "build-tools;34.0.0"
+
+      # Usa Gradle sem precisar do gradlew no repositório
       - name: Build with Gradle
         uses: gradle/gradle-build-action@v3
         with:
